@@ -1,0 +1,10 @@
+services:
+  order-service:
+    build: .
+    container_name: order-service-${ENV_NAME:-dev}
+    ports:
+      - "${HOST_PORT:-8002}:8002"
+    environment:
+      - USER_SERVICE_URL=${USER_SERVICE_URL:-http://host.docker.internal:8001}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

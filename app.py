@@ -41,7 +41,7 @@ def get_order(order_id):
             order['user'] = user_response.json()
         else:
             order['user'] = {"error": "User not found"}
-    except requests.exceptions.RequestException as e:
+    except requests.exceptions.RequestException:
         order['user'] = {"error": "User service unavailable"}
     
     return jsonify(order)
@@ -102,6 +102,3 @@ def create_order():
     orders_db[new_id] = new_order
     return jsonify(new_order), 201
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8002, debug=False)
-    
